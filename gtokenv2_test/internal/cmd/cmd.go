@@ -23,7 +23,7 @@ var (
 
 			s.Group("/api/v1", func(group *ghttp.RouterGroup) {
 				group.Middleware(
-					service.Middleware().CORS, // 跨域
+					service.Middleware().CORS,                                       // 跨域
 					gtoken.NewDefaultMiddleware(gtoken.GToken, gtoken.ResFunc).Auth, // gToken
 					service.Middleware().HandlerResponseMiddleware,                  // 统一返回
 				)
