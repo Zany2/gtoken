@@ -4,6 +4,7 @@ package user
 import (
 	"context"
 	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/util/gconv"
 	v1 "gtokenv2_test/api/user/v1"
 	"gtokenv2_test/gtoken"
 	"gtokenv2_test/internal/consts"
@@ -59,6 +60,7 @@ func (c *cUser) UserInfo(ctx context.Context, req *v1.UserInfoReq) (res *rr.Comm
 	if err != nil {
 		return
 	}
+	ctxValueMap := gconv.Map(ctx.Value(gtoken.KeyUserKey))
 
 	g.Dump("------------------------------------------------")
 	g.Dump("这是直接获取的上下文ctx中以userKey存储的value")
@@ -66,6 +68,9 @@ func (c *cUser) UserInfo(ctx context.Context, req *v1.UserInfoReq) (res *rr.Comm
 	g.Dump("------------------------------------------------")
 	g.Dump("这是以上下文ctx和token获取的缓存的data")
 	g.Dump(data)
+	g.Dump("------------------------------------------------")
+	g.Dump(ctxValueMap[consts.CtxUserId])
+	g.Dump(ctxValueMap[consts.CtxUserId])
 	g.Dump("------------------------------------------------")
 
 	websockets.SendMessage(userKey, &websockets.WsMessageRes{Data: "111111111111111111111111111111111111111111111111"})
